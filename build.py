@@ -32,7 +32,10 @@ DOCS = ROOT / "docs"
 SITE = {
     "name": "IndyIMBY",
     "url": "https://indyimby.com",          # change if using a different domain
-    "map_url": "https://map.indyimby.com",  # the entitlement tracker
+    # base: subpath the site is served from. "/indyimby-site" while on
+    # jtompk.github.io/indyimby-site; change to "" when indyimby.com is live.
+    "base": "/indyimby-site",
+    "map_url": "https://jtompk.github.io/indy-entitlement-tracker",  # swap to https://map.indyimby.com after DNS
     "tagline": "Yes. In my back yard.",
     "description": "Tracking every development filing in Indianapolis — and helping neighbors say yes.",
 }
@@ -65,6 +68,9 @@ def render(template: str, **ctx) -> str:
     page = base.replace("{{content}}", out)
     for k, v in {**SITE, **ctx}.items():
         page = page.replace("{{" + k + "}}", str(v))
+    # prefix internal absolute links with the base subpath (no-op when base="")
+    page = page.replace('href="/', 'href="' + SITE["base"] + '/')
+    page = page.replace('src="/', 'src="' + SITE["base"] + '/')
     return page
 
 
