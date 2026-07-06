@@ -20,10 +20,12 @@
   --font-display:'DIN','DIN Next','Bahnschrift','DIN Alternate','Barlow Semi Condensed',sans-serif;
   --font-mono:'IBM Plex Mono',monospace;
 
-  --ink:#1b2a33;        /* PLACEHOLDER - Proformus dark/primary */
-  --paper:#f7f4ec;      /* PLACEHOLDER - Proformus light/background */
-  --placard:#f0b429;    /* PLACEHOLDER - Proformus accent 1 (hero placard) */
-  --signal:#d64b2a;     /* PLACEHOLDER - Proformus accent 2 (sparing) */
+  --ink:#231f20;        /* Proformus black */
+  --paper:#f7f4ec;      /* warm paper (neutral ground for the palette) */
+  --placard:#fcb81f;    /* Proformus gold - the notice placard */
+  --signal:#e3002b;     /* Proformus red - sparing */
+  --blue:#0091cf;       /* Proformus blue - links & interactive accents */
+  --sky:#a3d6ed;        /* Proformus light blue - tints & highlights */
 
   --ink-soft:color-mix(in srgb, var(--ink) 82%, var(--paper));
   --placard-deep:color-mix(in srgb, var(--placard) 80%, var(--ink));
@@ -47,7 +49,7 @@ h1,h2,h3{font-family:var(--font-display);line-height:1.05;text-transform:upperca
 .nav nav{display:flex;gap:18px;flex-wrap:wrap}
 .nav nav a{text-decoration:none;font-size:14px;font-weight:600;padding:4px 2px;
   border-bottom:2px solid transparent}
-.nav nav a:hover{border-bottom-color:var(--placard)}
+.nav nav a:hover{border-bottom-color:var(--blue)}
 
 /* ---------- hero ---------- */
 .hero{display:grid;grid-template-columns:minmax(320px,430px) 1fr;gap:32px;
@@ -99,7 +101,7 @@ h1,h2,h3{font-family:var(--font-display);line-height:1.05;text-transform:upperca
 .prose p,.prose ul,.prose ol,.prose blockquote{margin:0 0 1.2em}
 .prose h2{font-size:24px;margin:1.6em 0 .5em}
 .prose h3{font-size:19px;margin:1.4em 0 .4em}
-.prose a{text-decoration-color:var(--placard);text-decoration-thickness:2px}
+.prose a{color:var(--blue);text-decoration-color:var(--sky);text-decoration-thickness:2px}
 .prose blockquote{border-left:4px solid var(--placard);padding-left:16px;color:var(--ink-soft)}
 .prose code{font-family:var(--font-mono);font-size:.9em;background:#efe9d9;padding:1px 5px}
 .prose table{border-collapse:collapse;width:100%;font-size:14.5px}
