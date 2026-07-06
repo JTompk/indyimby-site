@@ -1,0 +1,141 @@
+/* ================= PROFORMUS / INDYIMBY BRAND TOKENS =================
+   Fonts: Century Schoolbook (body/serif voice) + DIN (accent/display).
+   - Century Schoolbook: uses the locally installed face on most systems,
+     falling back to Georgia. If you own webfont files, drop them in
+     static/fonts/ and uncomment the @font-face blocks below.
+   - DIN: uses real DIN if installed (incl. Bahnschrift on Windows,
+     DIN Alternate on Mac), else Barlow Semi Condensed from Google Fonts,
+     the closest free match.
+   Colors: REPLACE the four PLACEHOLDER hex values below with the official
+   Proformus palette - everything on the site derives from these tokens.
+====================================================================== */
+
+/*
+@font-face{font-family:'Century Schoolbook';src:url('/static/fonts/CenturySchoolbook.woff2') format('woff2');font-weight:400;font-display:swap}
+@font-face{font-family:'DIN';src:url('/static/fonts/DIN-Bold.woff2') format('woff2');font-weight:700;font-display:swap}
+*/
+
+:root{
+  --font-body:'Century Schoolbook','Century Schoolbook L','New Century Schoolbook',Georgia,serif;
+  --font-display:'DIN','DIN Next','Bahnschrift','DIN Alternate','Barlow Semi Condensed',sans-serif;
+  --font-mono:'IBM Plex Mono',monospace;
+
+  --ink:#1b2a33;        /* PLACEHOLDER - Proformus dark/primary */
+  --paper:#f7f4ec;      /* PLACEHOLDER - Proformus light/background */
+  --placard:#f0b429;    /* PLACEHOLDER - Proformus accent 1 (hero placard) */
+  --signal:#d64b2a;     /* PLACEHOLDER - Proformus accent 2 (sparing) */
+
+  --ink-soft:color-mix(in srgb, var(--ink) 82%, var(--paper));
+  --placard-deep:color-mix(in srgb, var(--placard) 80%, var(--ink));
+  --muted:color-mix(in srgb, var(--ink) 55%, var(--paper));
+  --rule:color-mix(in srgb, var(--ink) 18%, var(--paper));
+}
+*{box-sizing:border-box;margin:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--font-body);background:var(--paper);color:var(--ink);line-height:1.6}
+a{color:inherit}
+h1,h2,h3{font-family:var(--font-display);line-height:1.05;text-transform:uppercase;letter-spacing:.02em}
+
+/* ---------- nav ---------- */
+.nav{display:flex;align-items:center;justify-content:space-between;gap:16px;
+  padding:14px 24px;border-bottom:2px solid var(--ink);background:var(--paper);
+  position:sticky;top:0;z-index:1000}
+.wordmark{font-family:var(--font-display);font-weight:700;font-size:24px;
+  letter-spacing:.04em;text-decoration:none}
+.wordmark span{background:var(--placard);padding:0 4px;margin-left:2px}
+.wordmark.small{font-size:19px}
+.nav nav{display:flex;gap:18px;flex-wrap:wrap}
+.nav nav a{text-decoration:none;font-size:14px;font-weight:600;padding:4px 2px;
+  border-bottom:2px solid transparent}
+.nav nav a:hover{border-bottom-color:var(--placard)}
+
+/* ---------- hero ---------- */
+.hero{display:grid;grid-template-columns:minmax(320px,430px) 1fr;gap:32px;
+  padding:44px 24px;max-width:1200px;margin:0 auto;align-items:start}
+.placard{background:var(--placard);border:3px solid var(--ink);padding:26px 24px 24px;
+  box-shadow:8px 8px 0 var(--ink);position:relative}
+.placard-head{font-family:var(--font-mono);font-size:11px;font-weight:500;
+  letter-spacing:.28em;text-transform:uppercase;border-bottom:2px solid var(--ink);
+  padding-bottom:8px;margin-bottom:14px}
+.placard h1{font-size:clamp(44px,6vw,72px);letter-spacing:.01em;font-weight:700}
+.placard-sub{margin:16px 0 20px;font-size:15.5px;font-weight:600;max-width:34ch}
+.placard-actions{display:flex;gap:10px;flex-wrap:wrap}
+.btn{display:inline-block;text-decoration:none;font-weight:600;font-size:14px;
+  padding:10px 16px;border:2px solid var(--ink)}
+.btn:hover{background:var(--paper)}
+.btn.solid{background:var(--ink);color:var(--placard)}
+.btn.solid:hover{background:var(--ink-soft);color:var(--paper)}
+
+.hero-map{border:3px solid var(--ink);background:#fff;min-height:440px;display:flex;flex-direction:column}
+.hero-map iframe{border:0;width:100%;flex:1;min-height:400px}
+.map-ticker{font-family:var(--font-mono);font-size:10.5px;letter-spacing:.06em;
+  padding:8px 12px;background:var(--ink);color:var(--paper);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+
+/* ---------- sections ---------- */
+.section{max-width:1200px;margin:0 auto;padding:36px 24px}
+.section-head{font-size:26px;border-bottom:2px solid var(--ink);padding-bottom:8px;margin-bottom:22px}
+.post-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:18px}
+.post-card{display:block;text-decoration:none;border:2px solid var(--ink);background:#fffdf7;
+  padding:18px;transition:box-shadow .12s ease, transform .12s ease}
+.post-card:hover{box-shadow:5px 5px 0 var(--placard);transform:translate(-1px,-1px)}
+.post-card h3{font-size:21px;margin:6px 0}
+.post-card p{font-size:14px;color:var(--ink-soft)}
+.post-date{font-family:var(--font-mono);font-size:11.5px;color:var(--muted);letter-spacing:.04em}
+.more{display:inline-block;margin-top:18px;font-weight:600;font-size:14px}
+.muted{color:var(--muted)}
+
+.act{padding-bottom:56px}
+.act-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:18px}
+.act-card{display:block;text-decoration:none;border:2px solid var(--ink);padding:20px;
+  background:var(--paper)}
+.act-card h3{font-size:22px;margin-bottom:8px}
+.act-card p{font-size:14px;color:var(--ink-soft)}
+.act-card:hover{background:var(--placard)}
+
+/* ---------- articles ---------- */
+.article{max-width:720px;margin:0 auto;padding:44px 24px 60px}
+.article h1{font-size:clamp(34px,5vw,52px);margin:6px 0 22px}
+.prose{font-size:17px}
+.prose p,.prose ul,.prose ol,.prose blockquote{margin:0 0 1.2em}
+.prose h2{font-size:24px;margin:1.6em 0 .5em}
+.prose h3{font-size:19px;margin:1.4em 0 .4em}
+.prose a{text-decoration-color:var(--placard);text-decoration-thickness:2px}
+.prose blockquote{border-left:4px solid var(--placard);padding-left:16px;color:var(--ink-soft)}
+.prose code{font-family:var(--font-mono);font-size:.9em;background:#efe9d9;padding:1px 5px}
+.prose table{border-collapse:collapse;width:100%;font-size:14.5px}
+.prose th,.prose td{border:1px solid var(--rule);padding:6px 10px;text-align:left}
+.article-foot{margin-top:36px;padding-top:14px;border-top:2px solid var(--ink);font-size:14px}
+
+/* ---------- footer ---------- */
+.footer{border-top:3px solid var(--ink);margin-top:24px;padding:28px 24px 36px;
+  max-width:1200px;margin-inline:auto;display:grid;gap:14px}
+.footer p{font-size:13.5px;color:var(--ink-soft);max-width:52ch}
+.footer-links{display:flex;gap:18px;flex-wrap:wrap;font-size:13.5px;font-weight:600}
+.colophon{font-family:var(--font-mono);font-size:11px;color:var(--muted)}
+
+/* ---------- responsive & a11y ---------- */
+@media (max-width:880px){
+  .hero{grid-template-columns:1fr}
+  .hero-map{min-height:360px}
+}
+:focus-visible{outline:3px solid var(--placard-deep);outline-offset:2px}
+@media (prefers-reduced-motion: reduce){*{transition:none!important;scroll-behavior:auto}}
+
+
+/* ---------- subscribe ---------- */
+.subscribe{background:var(--ink);color:var(--paper)}
+.subscribe-inner{max-width:1200px;margin:0 auto;padding:40px 24px;display:grid;
+  grid-template-columns:1.2fr 1fr;gap:28px;align-items:center}
+.subscribe h2{font-family:var(--font-display);font-size:30px;text-transform:uppercase;line-height:1.05}
+.subscribe p{font-size:15px;color:color-mix(in srgb,var(--paper) 80%,var(--ink));max-width:46ch;margin-top:8px}
+.subscribe form{display:flex;gap:10px;flex-wrap:wrap}
+.subscribe input[type=email]{flex:1;min-width:220px;padding:12px 14px;font:inherit;font-size:15px;
+  border:2px solid var(--paper);background:transparent;color:var(--paper)}
+.subscribe input[type=email]::placeholder{color:color-mix(in srgb,var(--paper) 60%,var(--ink))}
+.subscribe button{padding:12px 20px;font-family:var(--font-display);font-size:15px;font-weight:700;
+  text-transform:uppercase;letter-spacing:.05em;background:var(--placard);color:var(--ink);
+  border:2px solid var(--placard);cursor:pointer}
+.subscribe button:hover{background:var(--paper);border-color:var(--paper)}
+.subscribe .fine{font-family:var(--font-mono);font-size:11px;margin-top:10px;
+  color:color-mix(in srgb,var(--paper) 60%,var(--ink))}
+@media (max-width:760px){.subscribe-inner{grid-template-columns:1fr}}

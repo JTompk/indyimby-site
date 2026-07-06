@@ -1,0 +1,152 @@
+#!/usr/bin/env python3
+"""
+IndyIMBY static site builder.
+
+Content model:
+  content/posts/YYYY-MM-DD-slug.md   -> docs/digest/slug/index.html (+ index list)
+  content/pages/slug.md              -> docs/slug/index.html
+
+Front matter (simple key: value block between --- lines):
+  title:   Post title
+  date:    2026-07-06
+  summary: One-sentence deck shown on the homepage.
+
+Build:  python build.py
+Output: docs/  (served by GitHub Pages)
+"""
+
+import html
+import re
+import shutil
+from datetime import datetime, timezone
+from pathlib import Path
+
+import markdown
+
+ROOT = Path(__file__).resolve().parent
+CONTENT = ROOT / "content"
+TEMPLATES = ROOT / "templates"
+STATIC = ROOT / "static"
+DOCS = ROOT / "docs"
+
+SITE = {
+    "name": "IndyIMBY",
+    "url": "https://indyimby.com",          # change if using a different domain
+    "map_url": "https://map.indyimby.com",  # the entitlement tracker
+    "tagline": "Yes. In my back yard.",
+    "description": "Tracking every development filing in Indianapolis — and helping neighbors say yes.",
+}
+
+MD = markdown.Markdown(extensions=["tables", "fenced_code", "smarty"])
+
+
+def parse(path: Path):
+    raw = path.read_text(encoding="utf-8")
+    meta = {}
+    body = raw
+    m = re.match(r"^---\s*\n(.*?)\n---\s*\n", raw, re.DOTALL)
+    if m:
+        for line in m.group(1).splitlines():
+            if ":" in line:
+                k, v = line.split(":", 1)
+                meta[k.strip().lower()] = v.strip()
+        body = raw[m.end():]
+    MD.reset()
+    meta["html"] = MD.convert(body)
+    meta.setdefault("title", path.stem)
+    return meta
+
+
+def render(template: str, **ctx) -> str:
+    out = (TEMPLATES / template).read_text(encoding="utf-8")
+    base = (TEMPLATES / "base.html").read_text(encoding="utf-8")
+    for k, v in ctx.items():
+        out = out.replace("{{" + k + "}}", str(v))
+    page = base.replace("{{content}}", out)
+    for k, v in {**SITE, **ctx}.items():
+        page = page.replace("{{" + k + "}}", str(v))
+    return page
+
+
+def write(relpath: str, html_text: str):
+    out = DOCS / relpath
+    out.parent.mkdir(parents=True, exist_ok=True)
+    out.write_text(html_text, encoding="utf-8")
+    print(f"  built {relpath}")
+
+
+def main():
+    # fresh docs/, preserving CNAME if present
+    cname = (DOCS / "CNAME").read_text(encoding="utf-8") if (DOCS / "CNAME").exists() else None
+    if DOCS.exists():
+        shutil.rmtree(DOCS)
+    DOCS.mkdir()
+    if cname:
+        (DOCS / "CNAME").write_text(cname, encoding="utf-8")
+    shutil.copytree(STATIC, DOCS / "static")
+
+    # posts
+    posts = []
+    for p in sorted((CONTENT / "posts").glob("*.md"), reverse=True):
+        meta = parse(p)
+        slug = re.sub(r"^\d{4}-\d{2}-\d{2}-", "", p.stem)
+        meta["slug"] = slug
+        meta.setdefault("date", p.stem[:10])
+        posts.append(meta)
+        write(f"digest/{slug}/index.html",
+              render("post.html", title=meta["title"], date=meta["date"],
+                     body=meta["html"],
+                     page_title=f'{meta["title"]} — {SITE["name"]}'))
+
+    # pages
+    for p in sorted((CONTENT / "pages").glob("*.md")):
+        meta = parse(p)
+        write(f"{p.stem}/index.html",
+              render("page.html", title=meta["title"], body=meta["html"],
+                     page_title=f'{meta["title"]} — {SITE["name"]}'))
+
+    # homepage: latest 5 posts
+    cards = "\n".join(
+        f'<a class="post-card" href="/digest/{m["slug"]}/">'
+        f'<span class="post-date">{m["date"]}</span>'
+        f'<h3>{html.escape(m["title"])}</h3>'
+        f'<p>{html.escape(m.get("summary", ""))}</p></a>'
+        for m in posts[:5]
+    ) or '<p class="muted">First digest drops Monday.</p>'
+    write("index.html", render("index.html", post_cards=cards,
+                               page_title=f'{SITE["name"]} — {SITE["tagline"]}'))
+
+    # digest archive
+    all_cards = "\n".join(
+        f'<a class="post-card" href="/digest/{m["slug"]}/">'
+        f'<span class="post-date">{m["date"]}</span>'
+        f'<h3>{html.escape(m["title"])}</h3>'
+        f'<p>{html.escape(m.get("summary", ""))}</p></a>'
+        for m in posts
+    ) or '<p class="muted">First digest drops Monday.</p>'
+    write("digest/index.html",
+          render("page.html", title="The Weekly Digest",
+                 body=f'<div class="post-grid">{all_cards}</div>',
+                 page_title=f'Digest archive — {SITE["name"]}'))
+
+    # RSS
+    items = "\n".join(
+        f"<item><title>{html.escape(m['title'])}</title>"
+        f"<link>{SITE['url']}/digest/{m['slug']}/</link>"
+        f"<guid>{SITE['url']}/digest/{m['slug']}/</guid>"
+        f"<pubDate>{m['date']}</pubDate>"
+        f"<description>{html.escape(m.get('summary', ''))}</description></item>"
+        for m in posts[:20]
+    )
+    write("feed.xml",
+          f'<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"><channel>'
+          f'<title>{SITE["name"]}</title><link>{SITE["url"]}</link>'
+          f'<description>{SITE["description"]}</description>'
+          f'<lastBuildDate>{datetime.now(timezone.utc).isoformat()}</lastBuildDate>'
+          f'{items}</channel></rss>')
+
+    print(f"[done] {len(posts)} post(s), site in docs/")
+
+
+if __name__ == "__main__":
+    main()
