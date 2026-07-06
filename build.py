@@ -34,8 +34,8 @@ SITE = {
     "url": "https://indyimby.com",          # change if using a different domain
     # base: subpath the site is served from. "/indyimby-site" while on
     # jtompk.github.io/indyimby-site; change to "" when indyimby.com is live.
-    "base": "/indyimby-site",
-    "map_url": "https://jtompk.github.io/indy-entitlement-tracker",  # swap to https://map.indyimby.com after DNS
+    "base": "",
+    "map_url": "https://map.indyimby.com",  # the entitlement tracker
     "tagline": "Yes. In my back yard.",
     "description": "Tracking every development filing in Indianapolis — and helping neighbors say yes.",
 }
