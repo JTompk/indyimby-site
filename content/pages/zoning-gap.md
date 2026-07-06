@@ -3,9 +3,12 @@ title: The Zoning Gap
 ---
 
 **Where does Indianapolis zoning disagree with its own comprehensive plan —
-and in which direction?** That's the question the Zoning Gap project answers,
-parcel by parcel, across all of Marion County. The interactive map is in
-development; the method is public now, because the method is the point.
+and in which direction?** That's the question the Zoning Gap map answers,
+parcel by parcel, across all of Marion County.
+
+<p><a class="btn solid" href="https://map.indyimby.com/gap.html" style="display:inline-block;background:#231f20;color:#fcb81f;padding:12px 20px;text-decoration:none;font-weight:700;border:2px solid #231f20">Open the Zoning Gap map →</a></p>
+
+<iframe src="https://map.indyimby.com/gap.html" title="The Zoning Gap — interactive map" loading="lazy" style="width:100%;height:520px;border:3px solid #231f20"></iframe>
 
 ## The idea
 
