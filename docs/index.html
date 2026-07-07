@@ -27,7 +27,7 @@
   <section class="hero">
     <div class="placard">
       <div class="placard-head">Public notice</div>
-     <h1>Yes.<br>In my<br>back yard.<br>In Indy.</h1>
+      <h1>Yes.<br>In my<br>back yard.</h1>
       <p class="placard-sub">Indianapolis files dozens of rezonings, variances, and
       plats every month. We map every one of them — and help neighbors show up
       for the good ones.</p>
@@ -40,6 +40,34 @@
       <iframe src="https://map.indyimby.com" title="Indy Entitlement Tracker — live map of development filings" loading="lazy"></iframe>
       <div class="map-ticker">LIVE · UPDATED EVERY MONDAY FROM DMD AGENDAS · MDC · HEARING EXAMINER · BZA I–III · PLAT</div>
     </div>
+  </section>
+
+  <section class="statband">
+    <div class="statband-inner">
+      <a class="statcard" href="/zoning-gap/">
+        <span class="stat-num" id="stat-apts">69.6%</span>
+        <span class="stat-label">of Indianapolis bans apartments</span>
+      </a>
+      <a class="statcard" href="/zoning-gap/">
+        <span class="stat-num" id="stat-retail">60.7%</span>
+        <span class="stat-label">bans the corner store</span>
+      </a>
+      <a class="statcard" href="/zoning-gap/">
+        <span class="stat-num" id="stat-under">2,222 ac</span>
+        <span class="stat-label">where the plan says yes &amp; the code says no</span>
+      </a>
+      <a class="statcard cta" href="https://map.indyimby.com/gap.html">
+        <span class="stat-num">Your address?</span>
+        <span class="stat-label">See what's actually allowed →</span>
+      </a>
+    </div>
+    <script>
+    fetch('https://map.indyimby.com/data/gap_stats.json').then(r=>r.json()).then(s=>{
+      if(s.no_apts_pct!=null) document.getElementById('stat-apts').textContent=s.no_apts_pct+'%';
+      if(s.no_retail_pct!=null) document.getElementById('stat-retail').textContent=s.no_retail_pct+'%';
+      if(s.by_code&&s.by_code.U!=null) document.getElementById('stat-under').textContent=s.by_code.U.toLocaleString()+' ac';
+    }).catch(()=>{});
+    </script>
   </section>
 
   <section class="section">
