@@ -141,3 +141,20 @@ h1,h2,h3{font-family:var(--font-display);line-height:1.05;text-transform:upperca
 .subscribe .fine{font-family:var(--font-mono);font-size:11px;margin-top:10px;
   color:color-mix(in srgb,var(--paper) 60%,var(--ink))}
 @media (max-width:760px){.subscribe-inner{grid-template-columns:1fr}}
+
+
+/* ---------- stat band ---------- */
+.statband{border-top:3px solid var(--ink);border-bottom:3px solid var(--ink);background:#fffdf7}
+.statband-inner{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr))}
+.statcard{display:flex;flex-direction:column;gap:6px;padding:26px 22px;text-decoration:none;
+  border-right:1px solid var(--rule);transition:background .12s ease}
+.statcard:last-child{border-right:none}
+.statcard:hover{background:var(--placard)}
+.stat-num{font-family:var(--font-display);font-weight:700;font-size:clamp(30px,3.4vw,44px);
+  line-height:1;text-transform:uppercase;letter-spacing:.01em}
+.stat-label{font-size:13.5px;color:var(--ink-soft);max-width:24ch}
+.statcard.cta{background:var(--ink);color:var(--paper)}
+.statcard.cta .stat-label{color:var(--paper-dim,#c9c4b4);color:color-mix(in srgb,var(--paper) 75%,var(--ink))}
+.statcard.cta:hover{background:var(--ink-soft)}
+.statcard.cta:hover .stat-num{color:var(--placard)}
+@media (max-width:760px){.statcard{border-right:none;border-bottom:1px solid var(--rule)}}
