@@ -36,7 +36,7 @@ SITE = {
     # jtompk.github.io/indyimby-site; change to "" when indyimby.com is live.
     "base": "",
     "map_url": "https://map.indyimby.com",  # the entitlement tracker
-    "tagline": "Yes. In my back yard.",
+    "tagline": "Yes. In my back yard. In Indy.",
     "description": "Tracking every development filing in Indianapolis — and helping neighbors say yes.",
 }
 
