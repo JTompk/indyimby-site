@@ -19,11 +19,10 @@ township-adopted plans still governing the rest. Everyone assumes the two
 rulebooks roughly agree. This map measures where they don't:
 
 - **Underzoned:** the plan calls for more than the code allows. As of the
-  July 2026 build, that's **1,893 acres** — 1,679 under the Pattern Book
-  and 214 under the legacy plans. Nearly all of it sits in the streetcar-era
-  urban core: blocks the city has designated Traditional Neighborhood, City
-  Neighborhood, or Village Mixed-Use that are still zoned for less. Every
-  rezoning petition there is asking the code to catch up with the plan.
+  current build, that's **2,222 acres** — 1,824 under the Pattern Book and
+  398 under the legacy plans, measured at parcel resolution. The single
+  largest category: over 500 acres zoned D-3 under the typology the Pattern
+  Book literally names "Traditional Neighborhood."
 - **Overzoned:** the code allows more than the plan intends — often aging
   auto-oriented commercial zoning stranded in neighborhood fabric.
 - **Greenfield gap:** undeveloped fringe (agricultural zoning under suburban
@@ -42,9 +41,11 @@ but what the code forbids outright, district by district:
   prohibited by right in every dwelling district in the county, including
   the ones the Pattern Book literally names "Traditional Neighborhood."
 
-The map's totals panel reports current acreage and percentages for each.
-These are deliberately conservative counts: districts where limited
-residential or retail is arguably possible are *not* flagged.
+As of the current build: homes are prohibited by right on **29.9%** of
+analyzed land, apartments on **69.6%**, and neighborhood retail on
+**60.7%**. These are conservative counts — districts where limited
+residential or retail is arguably possible are not flagged, and the
+denominator includes parks and special districts.
 
 ## Ask about your address
 
