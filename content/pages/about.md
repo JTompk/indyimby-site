@@ -17,4 +17,8 @@ Metropolitan Development. Locations are approximate; every map marker links
 to its source document. Code for the tracker and this site is open —
 corrections and contributions welcome.
 
+please contact us at indyimby@gmail.com
+
+all rights reserved ©2026 Jeffery Tompkins
+
 <!-- TODO: contact link / email -->
