@@ -2,7 +2,7 @@
   <section class="hero">
     <div class="placard">
       <div class="placard-head">Public notice</div>
-      <h1>Yes.<br>In my<br>back yard.</h1>
+      <h1>Yes.<br>In my<br>back yard.<br>In Indy.</h1>
       <p class="placard-sub">Indianapolis files dozens of rezonings, variances, and
       plats every month. We map every one of them — and help neighbors show up
       for the good ones.</p>
@@ -15,6 +15,33 @@
       <iframe src="{{map_url}}" title="Indy Entitlement Tracker — live map of development filings" loading="lazy"></iframe>
       <div class="map-ticker">LIVE · UPDATED EVERY MONDAY FROM DMD AGENDAS · MDC · HEARING EXAMINER · BZA I–III · PLAT</div>
     </div>
+  </section>
+
+  <section class="fresh">
+    <div class="fresh-inner">
+      <div class="fresh-list">
+        <h2 class="section-head">Fresh on the docket</h2>
+        <ul id="fresh-items"><li class="muted">Loading the latest filings…</li></ul>
+      </div>
+      <a class="fresh-digest" href="{{latest_url}}">
+        <span class="fresh-kicker">This week's digest</span>
+        <h3>{{latest_title}}</h3>
+        <p>{{latest_summary}}</p>
+        <span class="more">Read it →</span>
+      </a>
+    </div>
+    <script>
+    fetch('https://map.indyimby.com/data/latest.json').then(r=>r.json()).then(items=>{
+      const ul=document.getElementById('fresh-items');
+      if(!items.length){ul.innerHTML='<li class="muted">Quiet docket right now.</li>';return;}
+      ul.innerHTML=items.slice(0,6).map(i=>
+        '<li><span class="fresh-tag">'+(i.type||'')+'</span> '+
+        '<b>'+(i.case||'')+'</b>'+(i.address?' — '+i.address:'')+
+        (i.meeting_date?' <span class="fresh-date">hearing '+i.meeting_date+'</span>':'')+
+        '</li>').join('');
+    }).catch(()=>{document.getElementById('fresh-items').innerHTML=
+      '<li class="muted">See the <a href="{{map_url}}">live map</a> for the latest.</li>'});
+    </script>
   </section>
 
   <section class="statband">
