@@ -172,5 +172,6 @@ h1,h2,h3{font-family:var(--font-display);line-height:1.05;text-transform:upperca
 .fresh-kicker{font-family:var(--font-mono);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase}
 .fresh-digest h3{margin:8px 0 8px;font-size:19px;line-height:1.25}
 .fresh-digest p{font-size:13.5px;margin:0 0 10px}
+.fresh-sum{display:block;font-size:13px;opacity:.8;margin-top:3px}
 .muted{opacity:.65}
 @media (max-width:900px){.fresh-inner{grid-template-columns:1fr}}
