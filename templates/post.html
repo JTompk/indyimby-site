@@ -2,6 +2,17 @@
   <p class="post-date">{{date}}</p>
   <h1>{{title}}</h1>
   <div class="prose">{{body}}</div>
+  <div class="post-subscribe">
+    <h3>Get this every Monday</h3>
+    <p>Every new rezoning, variance, and tax abatement in Indianapolis —
+    mapped and explained, free.</p>
+    <form action="https://buttondown.email/api/emails/embed-subscribe/jefferytompkins"
+          method="post" target="_blank">
+      <input type="email" name="email" placeholder="you@example.com"
+             aria-label="Email address" required>
+      <button type="submit">Subscribe</button>
+    </form>
+  </div>
   <p class="article-foot"><a href="/digest/">← All digests</a> ·
   <a href="{{map_url}}">Open the live map</a></p>
 </main>
