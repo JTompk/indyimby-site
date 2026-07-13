@@ -175,3 +175,14 @@ h1,h2,h3{font-family:var(--font-display);line-height:1.05;text-transform:upperca
 .fresh-sum{display:block;font-size:13px;opacity:.8;margin-top:3px}
 .muted{opacity:.65}
 @media (max-width:900px){.fresh-inner{grid-template-columns:1fr}}
+
+/* ---------- post-footer subscribe ---------- */
+.post-subscribe{border:3px solid var(--ink);background:var(--placard);
+  padding:18px 20px;margin:32px 0 20px;box-shadow:6px 6px 0 var(--ink)}
+.post-subscribe p{margin:0 0 12px;font-size:14.5px}
+.post-subscribe form{display:flex;gap:8px;flex-wrap:wrap}
+.post-subscribe input[type=email]{flex:1;min-width:200px;padding:10px 12px;
+  border:2px solid var(--ink);font-size:14px}
+.post-subscribe button{padding:10px 18px;border:2px solid var(--ink);
+  background:var(--ink);color:var(--paper);font-weight:600;cursor:pointer}
+.fresh-sub{margin:14px 0 0;font-size:13.5px}
