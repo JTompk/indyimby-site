@@ -3,13 +3,19 @@
 IndyIMBY static site builder.
 
 Content model:
-  content/posts/YYYY-MM-DD-slug.md   -> docs/digest/slug/index.html (+ index list)
+  content/posts/YYYY-MM-DD-slug.md   -> docs/digest/YYYY-MM-DD-slug/index.html
   content/pages/slug.md              -> docs/slug/index.html
 
 Front matter (simple key: value block between --- lines):
   title:   Post title
   date:    2026-07-06
   summary: One-sentence deck shown on the homepage.
+
+Post slugs keep the full filename (date included) so weekly digests named
+"YYYY-MM-DD-this-week.md" never collide at the same URL.
+
+REDIRECTS below regenerates stubs for old URLs on every build — necessary
+because docs/ is wiped each build, so hand-placed files there don't survive.
 
 Build:  python build.py
 Output: docs/  (served by GitHub Pages)
@@ -38,6 +44,13 @@ SITE = {
     "map_url": "https://map.indyimby.com",  # the entitlement tracker
     "tagline": "Yes. In my back yard. In Indy.",
     "description": "Tracking every development filing in Indianapolis — and helping neighbors say yes.",
+}
+
+# Old URL path -> new URL path. Stubs are regenerated every build.
+# Add entries here whenever a published URL changes.
+REDIRECTS = {
+    "digest/welcome-back": "digest/2026-07-06-welcome-back",
+    "digest/this-week": "digest/2026-07-13-this-week",
 }
 
 MD = markdown.Markdown(extensions=["tables", "fenced_code", "smarty"])
@@ -81,6 +94,18 @@ def write(relpath: str, html_text: str):
     print(f"  built {relpath}")
 
 
+def redirect_stub(target_path: str) -> str:
+    url = f"{SITE['url']}/{target_path}/"
+    return (
+        '<!doctype html>\n<html lang="en">\n<head>\n<meta charset="utf-8">\n'
+        f'<title>Redirecting — {SITE["name"]}</title>\n'
+        f'<meta http-equiv="refresh" content="0;url={url}">\n'
+        f'<link rel="canonical" href="{url}">\n</head>\n<body>\n'
+        f'<p>This page has moved. If you are not redirected automatically, '
+        f'<a href="{url}">continue here</a>.</p>\n</body>\n</html>\n'
+    )
+
+
 def main():
     # fresh docs/, preserving CNAME if present
     cname = (DOCS / "CNAME").read_text(encoding="utf-8") if (DOCS / "CNAME").exists() else None
@@ -91,11 +116,11 @@ def main():
         (DOCS / "CNAME").write_text(cname, encoding="utf-8")
     shutil.copytree(STATIC, DOCS / "static")
 
-    # posts
+    # posts — slug keeps the full dated filename so weekly digests never collide
     posts = []
     for p in sorted((CONTENT / "posts").glob("*.md"), reverse=True):
         meta = parse(p)
-        slug = re.sub(r"^\d{4}-\d{2}-\d{2}-", "", p.stem)
+        slug = p.stem
         meta["slug"] = slug
         meta.setdefault("date", p.stem[:10])
         posts.append(meta)
@@ -110,6 +135,12 @@ def main():
         write(f"{p.stem}/index.html",
               render("page.html", title=meta["title"], body=meta["html"],
                      page_title=f'{meta["title"]} — {SITE["name"]}'))
+
+    # redirect stubs for moved URLs (regenerated every build; docs/ is wiped)
+    for old, new in REDIRECTS.items():
+        if old.strip("/") == new.strip("/"):
+            continue
+        write(f"{old.strip('/')}/index.html", redirect_stub(new.strip("/")))
 
     # homepage: latest 5 posts
     cards = "\n".join(
@@ -151,7 +182,7 @@ def main():
           f'<lastBuildDate>{datetime.now(timezone.utc).isoformat()}</lastBuildDate>'
           f'{items}</channel></rss>')
 
-    print(f"[done] {len(posts)} post(s), site in docs/")
+    print(f"[done] {len(posts)} post(s), {len(REDIRECTS)} redirect(s), site in docs/")
 
 
 if __name__ == "__main__":
