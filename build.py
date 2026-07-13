@@ -150,7 +150,11 @@ def main():
         f'<p>{html.escape(m.get("summary", ""))}</p></a>'
         for m in posts[:5]
     ) or '<p class="muted">First digest drops Monday.</p>'
+    latest = posts[0] if posts else {}
     write("index.html", render("index.html", post_cards=cards,
+                               latest_title=latest.get("title", "The Monday digest"),
+                               latest_summary=latest.get("summary", ""),
+                               latest_url=f'/digest/{latest["slug"]}/' if latest else "/digest/",
                                page_title=f'{SITE["name"]} — {SITE["tagline"]}'))
 
     # digest archive
