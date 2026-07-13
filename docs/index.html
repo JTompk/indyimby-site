@@ -59,10 +59,12 @@
     fetch('https://map.indyimby.com/data/latest.json').then(r=>r.json()).then(items=>{
       const ul=document.getElementById('fresh-items');
       if(!items.length){ul.innerHTML='<li class="muted">Quiet docket right now.</li>';return;}
+      const esc=t=>String(t||'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
       ul.innerHTML=items.slice(0,6).map(i=>
-        '<li><span class="fresh-tag">'+(i.type||'')+'</span> '+
-        '<b>'+(i.case||'')+'</b>'+(i.address?' — '+i.address:'')+
-        (i.meeting_date?' <span class="fresh-date">hearing '+i.meeting_date+'</span>':'')+
+        '<li><span class="fresh-tag">'+esc(i.type)+'</span> '+
+        '<b>'+esc(i.case)+'</b>'+(i.address?' — '+esc(i.address):'')+
+        (i.meeting_date?' <span class="fresh-date">hearing '+esc(i.meeting_date)+'</span>':'')+
+        (i.summary?'<span class="fresh-sum">'+esc(i.summary)+'</span>':'')+
         '</li>').join('');
     }).catch(()=>{document.getElementById('fresh-items').innerHTML=
       '<li class="muted">See the <a href="https://map.indyimby.com">live map</a> for the latest.</li>'});
