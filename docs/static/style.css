@@ -68,8 +68,8 @@ h1,h2,h3{font-family:var(--font-display);line-height:1.05;text-transform:upperca
 .btn.solid{background:var(--ink);color:var(--placard)}
 .btn.solid:hover{background:var(--ink-soft);color:var(--paper)}
 
-.hero-map{border:3px solid var(--ink);background:#fff;min-height:440px;display:flex;flex-direction:column}
-.hero-map iframe{border:0;width:100%;flex:1;min-height:400px}
+.hero-map{border:3px solid var(--ink);background:#fff;min-height:660px;display:flex;flex-direction:column}
+.hero-map iframe{border:0;width:100%;flex:1;min-height:620px}
 .map-ticker{font-family:var(--font-mono);font-size:10.5px;letter-spacing:.06em;
   padding:8px 12px;background:var(--ink);color:var(--paper);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 
@@ -118,7 +118,7 @@ h1,h2,h3{font-family:var(--font-display);line-height:1.05;text-transform:upperca
 /* ---------- responsive & a11y ---------- */
 @media (max-width:880px){
   .hero{grid-template-columns:1fr}
-  .hero-map{min-height:360px}
+  .hero-map{min-height:440px}
 }
 :focus-visible{outline:3px solid var(--placard-deep);outline-offset:2px}
 @media (prefers-reduced-motion: reduce){*{transition:none!important;scroll-behavior:auto}}
@@ -158,3 +158,19 @@ h1,h2,h3{font-family:var(--font-display);line-height:1.05;text-transform:upperca
 .statcard.cta:hover{background:var(--ink-soft)}
 .statcard.cta:hover .stat-num{color:var(--placard)}
 @media (max-width:760px){.statcard{border-right:none;border-bottom:1px solid var(--rule)}}
+
+/* ---------- fresh on the docket ---------- */
+.fresh{max-width:1200px;margin:0 auto;padding:8px 24px 36px}
+.fresh-inner{display:grid;grid-template-columns:1fr minmax(280px,360px);gap:28px;align-items:start}
+.fresh-list ul{list-style:none;margin:14px 0 0;padding:0;font-size:14.5px}
+.fresh-list li{padding:9px 2px;border-bottom:1px solid rgba(0,0,0,.12);line-height:1.45}
+.fresh-tag{font-family:var(--font-mono);font-size:10px;letter-spacing:.05em;text-transform:uppercase;
+  background:var(--ink);color:var(--paper);padding:2px 6px;margin-right:6px;white-space:nowrap}
+.fresh-date{font-family:var(--font-mono);font-size:11px;opacity:.75}
+.fresh-digest{display:block;text-decoration:none;color:inherit;border:3px solid var(--ink);
+  background:var(--placard);padding:20px;box-shadow:6px 6px 0 var(--ink);margin-top:14px}
+.fresh-kicker{font-family:var(--font-mono);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase}
+.fresh-digest h3{margin:8px 0 8px;font-size:19px;line-height:1.25}
+.fresh-digest p{font-size:13.5px;margin:0 0 10px}
+.muted{opacity:.65}
+@media (max-width:900px){.fresh-inner{grid-template-columns:1fr}}
