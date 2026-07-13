@@ -66,6 +66,8 @@
         <span class="more">Read it →</span>
       </a>
     </div>
+    <p class="fresh-sub">Want these in your inbox? <a href="#subscribe">Subscribe
+    to the Monday digest ↓</a></p>
     <script>
     fetch('https://map.indyimby.com/data/latest.json').then(r=>r.json()).then(items=>{
       const ul=document.getElementById('fresh-items');
@@ -120,7 +122,7 @@
   </section>
 
 
-  <section class="subscribe">
+  <section class="subscribe" id="subscribe">
     <div class="subscribe-inner">
       <div>
         <h2>The Monday digest, in your inbox</h2>
