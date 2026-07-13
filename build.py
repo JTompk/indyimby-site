@@ -44,6 +44,9 @@ SITE = {
     "map_url": "https://map.indyimby.com",  # the entitlement tracker
     "tagline": "Yes. In my back yard. In Indy.",
     "description": "Tracking every development filing in Indianapolis — and helping neighbors say yes.",
+    # default og_description; per-page ctx overrides (posts pass their summary)
+    "og_description": "Tracking every development filing in Indianapolis — and helping neighbors say yes.",
+    "og_url": "https://indyimby.com/",
 }
 
 # Old URL path -> new URL path. Stubs are regenerated every build.
@@ -127,6 +130,8 @@ def main():
         write(f"digest/{slug}/index.html",
               render("post.html", title=meta["title"], date=meta["date"],
                      body=meta["html"],
+                     og_description=html.escape(meta.get("summary", SITE["og_description"])),
+                     og_url=f'{SITE["url"]}/digest/{slug}/',
                      page_title=f'{meta["title"]} — {SITE["name"]}'))
 
     # pages
@@ -134,6 +139,7 @@ def main():
         meta = parse(p)
         write(f"{p.stem}/index.html",
               render("page.html", title=meta["title"], body=meta["html"],
+                     og_url=f'{SITE["url"]}/{p.stem}/',
                      page_title=f'{meta["title"]} — {SITE["name"]}'))
 
     # redirect stubs for moved URLs (regenerated every build; docs/ is wiped)
