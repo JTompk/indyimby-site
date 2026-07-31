@@ -20,11 +20,15 @@
 <link rel="icon" href="/static/favicon-32.png" type="image/png" sizes="32x32">
 <link rel="apple-touch-icon" href="/static/apple-touch-icon.png">
 <link rel="stylesheet" href="/static/style.css">
+<script>document.documentElement.classList.add('js')</script>
 </head>
 <body>
-<header class="nav">
+<header class="nav" id="siteHeader">
   <a class="wordmark" href="/">INDY<span>IMBY</span></a>
-  <nav>
+  <button class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="siteNav" aria-label="Open menu">
+    <span></span><span></span><span></span>
+  </button>
+  <nav id="siteNav">
     <a href="/start-here/">Start here</a>
     <a href="/about/">About</a>
     <a href="{{map_url}}">Live map</a>
@@ -52,5 +56,19 @@
   <p class="colophon">Independent and reader-supported since 2015. Data compiled weekly
   from public Indianapolis DMD records.</p>
 </footer>
+<script>
+(function(){
+  var h=document.getElementById('siteHeader'),b=document.getElementById('menuBtn');
+  if(!h||!b)return;
+  function set(open){
+    h.classList.toggle('open',open);
+    b.setAttribute('aria-expanded',open);
+    b.setAttribute('aria-label',open?'Close menu':'Open menu');
+  }
+  b.addEventListener('click',function(){set(!h.classList.contains('open'))});
+  h.querySelectorAll('nav a').forEach(function(a){a.addEventListener('click',function(){set(false)})});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape')set(false)});
+})();
+</script>
 </body>
 </html>
