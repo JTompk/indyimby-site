@@ -1,44 +1,3 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>IndyIMBY — Yes. In my back yard. In Indy.</title>
-<meta name="description" content="Tracking every development filing in Indianapolis — and helping neighbors say yes.">
-<link rel="alternate" type="application/rss+xml" title="IndyIMBY" href="/feed.xml">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Jost:wght@400;500;600&family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-<meta name="description" content="Tracking every development filing in Indianapolis — and helping neighbors say yes.">
-<meta property="og:site_name" content="IndyIMBY">
-<meta property="og:type" content="website">
-<meta property="og:title" content="IndyIMBY — Yes. In my back yard. In Indy.">
-<meta property="og:description" content="Tracking every development filing in Indianapolis — and helping neighbors say yes.">
-<meta property="og:image" content="https://indyimby.com/static/og-card.png">
-<meta property="og:url" content="https://indyimby.com/">
-<meta name="twitter:card" content="summary_large_image">
-<link rel="icon" href="/static/favicon.svg" type="image/svg+xml">
-<link rel="icon" href="/static/favicon-32.png" type="image/png" sizes="32x32">
-<link rel="apple-touch-icon" href="/static/apple-touch-icon.png">
-<link rel="stylesheet" href="/static/style.css">
-<script>document.documentElement.classList.add('js')</script>
-</head>
-<body>
-<header class="nav" id="siteHeader">
-  <a class="wordmark" href="/">INDY<span>IMBY</span></a>
-  <button class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="siteNav" aria-label="Open menu">
-    <span></span><span></span><span></span>
-  </button>
-  <nav id="siteNav">
-    <a href="/start-here/">Start here</a>
-    <a href="/about/">About</a>
-    <a href="https://map.indyimby.com">Live map</a>
-    <a href="https://map.indyimby.com/build">What can I build?</a>
-    <a href="/digest/">Digest</a>
-    <a href="/zoning-gap/">Zoning Gap</a>
-    <a href="/how-to-testify/">Testify</a>
-  </nav>
-</header>
-
 <main>
   <section class="hero">
     <div class="placard">
@@ -48,15 +7,38 @@
       plats every month. We map every one of them — and help neighbors show up
       for the good ones.</p>
       <div class="placard-actions">
-        <a class="btn solid" href="https://map.indyimby.com">Open the live map</a>
+        <a class="btn solid" href="{{map_url}}">Open the live map</a>
         <a class="btn" href="/start-here/">Start here</a>
       </div>
     </div>
     <div class="hero-map">
-      <iframe src="https://map.indyimby.com" title="Indy Entitlement Tracker — live map of development filings" loading="lazy"></iframe>
+      <iframe src="{{map_url}}" title="Indy Entitlement Tracker — live map of development filings" loading="lazy"></iframe>
       <div class="map-ticker">LIVE · UPDATED EVERY MONDAY FROM DMD AGENDAS · MDC · HEARING EXAMINER · BZA I–III · PLAT</div>
     </div>
   </section>
+
+<section class="usesearch">
+  <div class="usesearch-inner">
+    <label class="usesearch-label" for="useq">What do you want to build?</label>
+    <form id="useSearchForm" action="https://map.indyimby.com/build" method="get">
+      <input type="search" id="useq" name="use" list="useOptions" required
+        placeholder="A daycare, a fourplex, a coffee shop&hellip;" autocomplete="off">
+      <datalist id="useOptions">
+        <option value="Single-family home"><option value="Accessory dwelling unit (ADU)">
+        <option value="Duplex"><option value="Triplex / fourplex"><option value="Townhomes">
+        <option value="Apartments"><option value="Home daycare"><option value="Daycare center">
+        <option value="Corner store"><option value="Grocery store"><option value="Restaurant / café">
+        <option value="Bar / tavern"><option value="Brewery with taproom"><option value="Small office">
+        <option value="Barbershop / salon"><option value="Church / place of worship">
+        <option value="School (K-12)"><option value="Light manufacturing"><option value="Warehouse">
+        <option value="Auto repair">
+      </datalist>
+      <button type="submit">Show me where</button>
+    </form>
+    <p class="usesearch-hint">The map paints every district where it&rsquo;s already legal &mdash; and where it isn&rsquo;t.</p>
+  </div>
+</section>
+
 
   <section class="fresh">
     <div class="fresh-inner">
@@ -64,16 +46,16 @@
         <h2 class="section-head">Fresh on the docket</h2>
         <ul id="fresh-items"><li class="muted">Loading the latest filings…</li></ul>
       </div>
-      <a class="fresh-digest" href="/digest/2026-07-27-this-week/">
+      <a class="fresh-digest" href="{{latest_url}}">
         <span class="fresh-kicker">This week's digest</span>
-        <h3>This week in Indy entitlement — July 27, 2026</h3>
-        <p>A quiet week on the DMD dockets.</p>
+        <h3>{{latest_title}}</h3>
+        <p>{{latest_summary}}</p>
         <span class="more">Read it →</span>
       </a>
     </div>
     <p class="fresh-sub">Want these in your inbox? <a href="#subscribe">Subscribe
     to the Monday digest ↓</a> &ensp;·&ensp; Planning something yourself?
-    <a href="https://map.indyimby.com/build">See what you can build →</a></p>
+    <a href="https://map.indyimby.com/build.html">See what you can build →</a></p>
     <script>
     fetch('https://map.indyimby.com/data/latest.json').then(r=>r.json()).then(items=>{
       const ul=document.getElementById('fresh-items');
@@ -86,7 +68,7 @@
         (i.summary?'<span class="fresh-sum">'+esc(i.summary)+'</span>':'')+
         '</li>').join('');
     }).catch(()=>{document.getElementById('fresh-items').innerHTML=
-      '<li class="muted">See the <a href="https://map.indyimby.com">live map</a> for the latest.</li>'});
+      '<li class="muted">See the <a href="{{map_url}}">live map</a> for the latest.</li>'});
     </script>
   </section>
 
@@ -104,7 +86,7 @@
         <span class="stat-num" id="stat-under">2,222 ac</span>
         <span class="stat-label">where the plan says yes &amp; the code says no</span>
       </a>
-      <a class="statcard cta" href="https://map.indyimby.com/build">
+      <a class="statcard cta" href="https://map.indyimby.com/build.html">
         <span class="stat-num">Your address?</span>
         <span class="stat-label">See what's actually allowed →</span>
       </a>
@@ -121,10 +103,7 @@
   <section class="section">
     <h2 class="section-head">This week in Indy entitlement</h2>
     <div class="post-grid">
-      <a class="post-card" href="/digest/2026-07-27-this-week/"><span class="post-date">2026-07-27</span><h3>This week in Indy entitlement — July 27, 2026</h3><p>A quiet week on the DMD dockets.</p></a>
-<a class="post-card" href="/digest/2026-07-20-this-week/"><span class="post-date">2026-07-20</span><h3>This week in Indy entitlement — July 20, 2026</h3><p>11 items on this week&#x27;s DMD agendas; 0 new filings.</p></a>
-<a class="post-card" href="/digest/2026-07-13-this-week/"><span class="post-date">2026-07-13</span><h3>This week in Indy entitlement — July 13, 2026</h3><p>Tax incentive at the Metropolitan Development Commission, 20 items on this week&#x27;s agendas, 0 new filings.</p></a>
-<a class="post-card" href="/digest/2026-07-06-welcome-back/"><span class="post-date">2026-07-06</span><h3>IndyIMBY is back — and this time it comes with receipts</h3><p>Relaunching the blog as a live database of every development filing in Indianapolis, updated weekly, plus a Monday digest of what it means.</p></a>
+      {{post_cards}}
     </div>
     <a class="more" href="/digest/">All digests →</a>
   </section>
@@ -158,7 +137,7 @@
         <p>Two minutes at a microphone moves votes. Here's exactly how MDC and
         BZA hearings work, and what to say.</p>
       </a>
-      <a class="act-card" href="https://map.indyimby.com">
+      <a class="act-card" href="{{map_url}}">
         <h3>Find what's filed near you</h3>
         <p>Search your street on the tracker. Every marker links to the agenda
         and the hearing date.</p>
@@ -168,7 +147,7 @@
         <p>Thousands of acres where the city's own plan already calls for more
         than the zoning allows — mapped for the first time.</p>
       </a>
-      <a class="act-card" href="https://map.indyimby.com/build">
+      <a class="act-card" href="https://map.indyimby.com/build.html">
         <h3>What can you build?</h3>
         <p>Pick a use — a daycare, a fourplex, a corner store — and see where
         the zoning code already says yes. And where it doesn't.</p>
@@ -176,37 +155,3 @@
     </div>
   </section>
 </main>
-
-
-<footer class="footer">
-  <div>
-    <span class="wordmark small">INDY<span>IMBY</span></span>
-    <p>Tracking every development filing in Indianapolis — and helping neighbors say yes.</p>
-  </div>
-  <div class="footer-links">
-    <a href="https://map.indyimby.com">Entitlement Tracker</a>
-    <a href="https://map.indyimby.com/build.html">What can I build?</a>
-    <a href="/feed.xml">RSS</a>
-    <a href="https://www.thinkingbigbythinkingsmall.com" rel="me">Thinking Big by Thinking Small</a>
-    <a href="https://proformus.com" rel="me">Proformus</a>
-  </div>
-  <p class="colophon">Independent and reader-supported since 2015. Data compiled weekly
-  from public Indianapolis DMD records.</p>
-</footer>
-<script>
-(function(){
-  var h=document.getElementById('siteHeader'),b=document.getElementById('menuBtn');
-  if(!h||!b)return;
-  function set(open){
-    h.classList.toggle('open',open);
-    b.setAttribute('aria-expanded',open);
-    b.setAttribute('aria-label',open?'Close menu':'Open menu');
-    document.body.style.overflow=open?'hidden':'';
-  }
-  b.addEventListener('click',function(){set(!h.classList.contains('open'))});
-  h.querySelectorAll('nav a').forEach(function(a){a.addEventListener('click',function(){set(false)})});
-  document.addEventListener('keydown',function(e){if(e.key==='Escape')set(false)});
-})();
-</script>
-</body>
-</html>
