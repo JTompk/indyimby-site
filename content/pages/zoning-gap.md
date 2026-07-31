@@ -10,6 +10,10 @@ Marion County, and lets you ask it about any address.
 
 <iframe src="https://map.indyimby.com/gap.html" title="The Zoning Gap — interactive map" loading="lazy" style="width:100%;height:520px;border:3px solid #231f20"></iframe>
 
+*The Zoning Gap shows where the code and the plan disagree. For the
+practical version of the question — can I put **this use** on **this
+lot**? — try [What can I build?](https://map.indyimby.com/build.html)*
+
 ## The idea
 
 Indianapolis has two rulebooks. The **zoning code** says what you may build
