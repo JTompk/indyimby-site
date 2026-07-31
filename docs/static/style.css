@@ -246,3 +246,25 @@ h1,h2,h3{font-family:var(--font-serif);font-weight:500;line-height:1.12;letter-s
   background:var(--ink);color:var(--paper);font-size:12px;font-weight:500;
   letter-spacing:.14em;text-transform:uppercase;cursor:pointer;transition:background .12s ease,color .12s ease}
 .post-subscribe button:hover{background:var(--paper);color:var(--ink)}
+
+/* ---------- what-do-you-want-to-build search band ---------- */
+.usesearch{border-top:1px solid var(--hairline);border-bottom:1px solid var(--hairline);background:var(--accent-tint)}
+.usesearch-inner{max-width:1240px;margin:0 auto;padding:36px 32px;display:grid;
+  grid-template-columns:auto 1fr auto;gap:10px 28px;align-items:center}
+.usesearch-label{font-family:var(--font-sans);font-size:12px;font-weight:500;
+  letter-spacing:.2em;text-transform:uppercase;color:var(--ink);white-space:nowrap}
+.usesearch form{display:flex;gap:0;grid-column:2}
+.usesearch input[type=search]{font-family:var(--font-serif);flex:1;min-width:0;padding:14px 16px;
+  font-size:17px;border:1px solid var(--ink);border-right:none;background:var(--paper);color:var(--ink)}
+.usesearch input[type=search]::placeholder{color:var(--muted);font-style:italic}
+.usesearch input[type=search]:focus{outline:2px solid var(--ink);outline-offset:-1px}
+.usesearch button{font-family:var(--font-sans);padding:14px 24px;font-size:12px;font-weight:500;
+  letter-spacing:.16em;text-transform:uppercase;background:var(--ink);color:var(--paper);
+  border:1px solid var(--ink);cursor:pointer;white-space:nowrap;transition:background .12s ease,color .12s ease}
+.usesearch button:hover{background:var(--accent);color:var(--ink)}
+.usesearch-hint{font-family:var(--font-sans);grid-column:3;font-size:12.5px;color:var(--ink-soft);max-width:24ch}
+@media (max-width:960px){
+  .usesearch-inner{grid-template-columns:1fr;gap:12px;padding:28px 20px}
+  .usesearch form{grid-column:1}
+  .usesearch-hint{grid-column:1;max-width:none}
+}
