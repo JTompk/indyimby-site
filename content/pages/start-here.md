@@ -27,6 +27,13 @@ More homes near jobs, transit, and Main Streets means lower rents, stronger
 small business, and a bigger tax base carrying less pavement per person.
 <!-- TODO: link your HPM / UPS framework essays here -->
 
+## Wondering about your own lot?
+
+Type what you want to build — a daycare, a fourplex, a corner store — into
+[What can I build?](https://map.indyimby.com/build.html) and the map shows
+where zoning already says yes, where it takes a hearing, and where it takes
+a rezoning.
+
 ## Do one thing
 
 Search your street on the tracker. If something's filed nearby, read it.
