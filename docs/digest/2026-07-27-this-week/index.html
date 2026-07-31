@@ -7,7 +7,7 @@
 <meta name="description" content="Tracking every development filing in Indianapolis — and helping neighbors say yes.">
 <link rel="alternate" type="application/rss+xml" title="IndyIMBY" href="/feed.xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Jost:wght@400;500;600&family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <meta name="description" content="A quiet week on the DMD dockets.">
 <meta property="og:site_name" content="IndyIMBY">
 <meta property="og:type" content="website">
@@ -85,6 +85,7 @@
     h.classList.toggle('open',open);
     b.setAttribute('aria-expanded',open);
     b.setAttribute('aria-label',open?'Close menu':'Open menu');
+    document.body.style.overflow=open?'hidden':'';
   }
   b.addEventListener('click',function(){set(!h.classList.contains('open'))});
   h.querySelectorAll('nav a').forEach(function(a){a.addEventListener('click',function(){set(false)})});
