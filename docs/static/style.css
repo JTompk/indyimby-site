@@ -70,7 +70,7 @@ h1,h2,h3{font-family:var(--font-serif);font-weight:500;line-height:1.12;letter-s
 /* ---------- hero ---------- */
 .hero{display:grid;grid-template-columns:minmax(320px,460px) 1fr;gap:48px;
   padding:72px 32px 64px;max-width:1240px;margin:0 auto;align-items:start}
-.placard{background:var(--accent);padding:44px 40px 40px;position:relative}
+.placard{background:var(--accent);padding:44px 40px 40px;position:relative;min-width:0}
 .placard-head{font-family:var(--font-sans);font-size:11px;font-weight:500;
   letter-spacing:.28em;text-transform:uppercase;color:var(--ink);opacity:.6;
   padding-bottom:16px;margin-bottom:24px;border-bottom:1px solid var(--ink)}
@@ -87,9 +87,9 @@ h1,h2,h3{font-family:var(--font-serif);font-weight:500;line-height:1.12;letter-s
 .btn.solid:hover{background:var(--paper);color:var(--ink)}
 
 .hero-map{background:var(--paper);border:1px solid var(--hairline);
-  min-height:660px;display:flex;flex-direction:column}
+  min-height:660px;display:flex;flex-direction:column;min-width:0}
 .hero-map iframe{border:0;width:100%;flex:1;min-height:620px}
-.map-ticker{font-family:var(--font-mono);font-size:10px;letter-spacing:.08em;
+.map-ticker{font-family:var(--font-mono);font-size:10px;letter-spacing:.08em;min-width:0;max-width:100%;
   padding:10px 14px;background:var(--ink);color:var(--accent);
   white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 
@@ -280,6 +280,7 @@ h1,h2,h3{font-family:var(--font-serif);font-weight:500;line-height:1.12;letter-s
 .usesearch-hint{font-family:var(--font-sans);grid-column:3;font-size:12.5px;color:var(--ink-soft);max-width:24ch}
 @media (max-width:960px){
   .usesearch-inner{grid-template-columns:1fr;gap:12px;padding:28px 20px}
-  .usesearch form{grid-column:1}
+  .usesearch-label{white-space:normal}
+  .usesearch form{grid-column:1;min-width:0}
   .usesearch-hint{grid-column:1;max-width:none}
 }
