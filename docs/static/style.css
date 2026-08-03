@@ -158,6 +158,8 @@ h1,h2,h3{font-family:var(--font-serif);font-weight:500;line-height:1.12;letter-s
 .footer-links a:hover{background:var(--accent)}
 .colophon{font-family:var(--font-mono);font-size:11px;color:var(--muted)}
 
+.map-jump{display:none}
+
 /* ---------- responsive & a11y ---------- */
 @media (max-width:880px){
   .hero{grid-template-columns:1fr;gap:28px;padding:36px 20px 40px}
@@ -168,6 +170,19 @@ h1,h2,h3{font-family:var(--font-serif);font-weight:500;line-height:1.12;letter-s
   .act{padding-bottom:56px}
   .article{padding:44px 20px 60px}
   .footer{padding:32px 20px 44px}
+}
+@media (max-width:760px){
+  .hero{padding:18px 16px 22px;gap:14px}
+  .placard{padding:22px 20px 22px}
+  .placard-head{padding-bottom:10px;margin-bottom:14px}
+  .placard h1{font-size:29px;line-height:1.12}
+  .placard h1 br{display:none}
+  .placard-sub{margin:12px 0 16px;font-size:14px;line-height:1.5}
+  .btn{padding:11px 16px;font-size:11px}
+  .hero-map{min-height:0;position:relative}
+  .hero-map iframe{min-height:0;height:200px;flex:none;pointer-events:none}
+  .map-jump{display:block;position:absolute;inset:0;z-index:3}
+  .map-ticker{font-size:9px;padding:8px 12px}
 }
 :focus-visible{outline:2px solid var(--ink);outline-offset:3px}
 @media (prefers-reduced-motion: reduce){*{transition:none!important;scroll-behavior:auto}}
