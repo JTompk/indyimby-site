@@ -149,6 +149,37 @@
   <a href="https://map.indyimby.com">Open the live map</a> ·
   <a href="https://map.indyimby.com/build">What can you build on your lot?</a></p>
 </main>
+<script>
+/* Digest use-case filter. The chips are plain anchor links (they still
+   jump to the section without JS / in email); with JS they narrow the
+   docket to one category and mirror the choice into the URL hash. */
+(function(){
+  var chips=[].slice.call(document.querySelectorAll('.chips .chip'));
+  if(!chips.length) return;
+  function apply(cat){
+    chips.forEach(function(c){c.classList.toggle('is-on',c.getAttribute('data-cat')===cat)});
+    var any=false;
+    [].forEach.call(document.querySelectorAll('.dk'),function(li){
+      var on=(cat==='all'||li.getAttribute('data-cat')===cat); li.hidden=!on; if(on) any=true;
+    });
+    [].forEach.call(document.querySelectorAll('.docket'),function(ul){
+      var show=!!ul.querySelector('.dk:not([hidden])'); ul.hidden=!show;
+      var p=ul.previousElementSibling;
+      while(p&&(p.classList.contains('dk-desc')||p.classList.contains('dk-h'))){p.hidden=!show;p=p.previousElementSibling;}
+      var n=ul.nextElementSibling; if(n&&n.classList.contains('dk-more')) n.hidden=!show;
+    });
+    [].forEach.call(document.querySelectorAll('.dk-empty'),function(e){e.classList.toggle('show',!any)});
+  }
+  chips.forEach(function(c){
+    c.addEventListener('click',function(e){
+      e.preventDefault(); var cat=c.getAttribute('data-cat'); apply(cat);
+      try{history.replaceState(null,'',cat==='all'?location.pathname:'#'+cat)}catch(err){}
+    });
+  });
+  var h=location.hash.replace('#','');
+  if(h&&chips.some(function(c){return c.getAttribute('data-cat')===h})) apply(h);
+})();
+</script>
 
 
 <footer class="footer">
