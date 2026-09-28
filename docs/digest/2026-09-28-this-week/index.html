@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>This week in Indy entitlement — September 28, 2026 — IndyIMBY</title>
+<meta name="description" content="Tracking every development filing in Indianapolis — and helping neighbors say yes.">
+<link rel="alternate" type="application/rss+xml" title="IndyIMBY" href="/feed.xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Jost:wght@400;500;600&family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<meta name="description" content="A quiet week on the DMD dockets.">
+<meta property="og:site_name" content="IndyIMBY">
+<meta property="og:type" content="website">
+<meta property="og:title" content="This week in Indy entitlement — September 28, 2026 — IndyIMBY">
+<meta property="og:description" content="A quiet week on the DMD dockets.">
+<meta property="og:image" content="https://indyimby.com/static/og-card.png">
+<meta property="og:url" content="https://indyimby.com/digest/2026-09-28-this-week/">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="/static/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/static/favicon-32.png" type="image/png" sizes="32x32">
+<link rel="apple-touch-icon" href="/static/apple-touch-icon.png">
+<link rel="stylesheet" href="/static/style.css">
+<script>document.documentElement.classList.add('js')</script>
+</head>
+<body>
+<header class="nav" id="siteHeader">
+  <a class="wordmark" href="/">INDY<span>IMBY</span></a>
+  <button class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="siteNav" aria-label="Open menu">
+    <span></span><span></span><span></span>
+  </button>
+  <nav id="siteNav">
+    <a href="/start-here/">Start here</a>
+    <a href="/about/">About</a>
+    <a href="https://map.indyimby.com">Live map</a>
+    <a href="https://map.indyimby.com/build">What can I build?</a>
+    <a href="/digest/">Digest</a>
+    <a href="/zoning-gap/">Zoning Gap</a>
+    <a href="/how-to-testify/">Testify</a>
+  </nav>
+</header>
+
+<main class="article">
+  <p class="post-date">2026-09-28</p>
+  <h1>This week in Indy entitlement — September 28, 2026</h1>
+  <div class="prose"><p>No DMD hearings on the calendar in the next 10 days. Quiet stretches happen — the <a href="https://map.indyimby.com">map</a> stays live in the meantime.</p>
+<hr />
+<p><em>This week by the numbers: 0 items on upcoming agendas, 0 new filings since last Monday. Every mappable filing is on the <a href="https://map.indyimby.com">Entitlement Tracker</a>, compiled from public DMD agendas. See something we got wrong? Reply and tell us.</em></p></div>
+  <div class="post-subscribe">
+    <h3>Get this every Monday</h3>
+    <p>Every new rezoning, variance, and tax abatement in Indianapolis —
+    mapped and explained, free.</p>
+    <form action="https://buttondown.email/api/emails/embed-subscribe/jefferytompkins"
+          method="post" target="_blank">
+      <input type="email" name="email" placeholder="you@example.com"
+             aria-label="Email address" required>
+      <button type="submit">Subscribe</button>
+    </form>
+  </div>
+  <p class="article-foot"><a href="/digest/">← All digests</a> ·
+  <a href="https://map.indyimby.com">Open the live map</a> ·
+  <a href="https://map.indyimby.com/build">What can you build on your lot?</a></p>
+</main>
+<script>
+/* Digest use-case filter. The chips are plain anchor links (they still
+   jump to the section without JS / in email); with JS they narrow the
+   docket to one category and mirror the choice into the URL hash. */
+(function(){
+  var chips=[].slice.call(document.querySelectorAll('.chips .chip'));
+  if(!chips.length) return;
+  function apply(cat){
+    chips.forEach(function(c){c.classList.toggle('is-on',c.getAttribute('data-cat')===cat)});
+    var any=false;
+    [].forEach.call(document.querySelectorAll('.dk'),function(li){
+      var on=(cat==='all'||li.getAttribute('data-cat')===cat); li.hidden=!on; if(on) any=true;
+    });
+    [].forEach.call(document.querySelectorAll('.docket'),function(ul){
+      var show=!!ul.querySelector('.dk:not([hidden])'); ul.hidden=!show;
+      var p=ul.previousElementSibling;
+      while(p&&(p.classList.contains('dk-desc')||p.classList.contains('dk-h'))){p.hidden=!show;p=p.previousElementSibling;}
+      var n=ul.nextElementSibling; if(n&&n.classList.contains('dk-more')) n.hidden=!show;
+    });
+    [].forEach.call(document.querySelectorAll('.dk-empty'),function(e){e.classList.toggle('show',!any)});
+  }
+  chips.forEach(function(c){
+    c.addEventListener('click',function(e){
+      e.preventDefault(); var cat=c.getAttribute('data-cat'); apply(cat);
+      try{history.replaceState(null,'',cat==='all'?location.pathname:'#'+cat)}catch(err){}
+    });
+  });
+  var h=location.hash.replace('#','');
+  if(h&&chips.some(function(c){return c.getAttribute('data-cat')===h})) apply(h);
+})();
+</script>
+
+
+<footer class="footer">
+  <div>
+    <span class="wordmark small">INDY<span>IMBY</span></span>
+    <p>Tracking every development filing in Indianapolis — and helping neighbors say yes.</p>
+  </div>
+  <div class="footer-links">
+    <a href="https://map.indyimby.com">Entitlement Tracker</a>
+    <a href="https://map.indyimby.com/build.html">What can I build?</a>
+    <a href="/feed.xml">RSS</a>
+    <a href="https://www.thinkingbigbythinkingsmall.com" rel="me">Thinking Big by Thinking Small</a>
+    <a href="https://proformus.com" rel="me">Proformus</a>
+  </div>
+  <p class="colophon">Independent and reader-supported since 2015. Data compiled weekly
+  from public Indianapolis DMD records.</p>
+</footer>
+<script>
+(function(){
+  var h=document.getElementById('siteHeader'),b=document.getElementById('menuBtn');
+  if(!h||!b)return;
+  function set(open){
+    h.classList.toggle('open',open);
+    b.setAttribute('aria-expanded',open);
+    b.setAttribute('aria-label',open?'Close menu':'Open menu');
+    document.body.style.overflow=open?'hidden':'';
+  }
+  b.addEventListener('click',function(){set(!h.classList.contains('open'))});
+  h.querySelectorAll('nav a').forEach(function(a){a.addEventListener('click',function(){set(false)})});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape')set(false)});
+})();
+</script>
+</body>
+</html>
